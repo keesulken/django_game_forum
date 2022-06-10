@@ -1,0 +1,39 @@
+{% extends 'default.html' %}
+
+{% load custom_filters %}
+{% load custom_tags %}
+
+{% block title %}
+Products
+{% endblock title %}
+
+{% block content %}
+<h1>All products</h1>
+<h3>{% current_time '%b %d %Y' %}</h3>
+<h3>{{ sale|default_if_none:'Сообщим чуть позже!' }}</h3>
+
+<hr>
+{% if products %}
+    <table>
+        <tr>
+            <td>Название</td>
+            <td>Описание</td>
+            <td>Категория</td>
+            <td>Цена</td>
+            <td>Количество</td>
+        </tr>
+
+        {% for product in products %}
+        <tr>
+            <td>{{ product.name }}</td>
+            <td>{{ product.description|truncatewords:2 }}</td>
+            <td>{{ product.category.name }}</td>
+            <td>{{ product.price|currency:'usd' }}</td>
+            <td>{{ product.quantity }}</td> <!-- Имитируем ошибку с неправильным полем -->
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+<h3>Товаров нет!</h3>
+{% endif %}
+{% endblock content %}
