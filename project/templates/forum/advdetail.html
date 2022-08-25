@@ -1,0 +1,12 @@
+{% extends 'default.html' %}
+
+{% block title %}
+{{ adv.title|truncatechars:20 }}
+{% endblock title %}
+
+{% block content %}
+<h1>Advertisement</h1>
+<h2>{{ adv.title }}</h2>
+<h4>{{ adv.publishing_date|date:'j M Y' }}</h4>
+<p>{{ adv.content }}</p>
+{% endblock content %}
